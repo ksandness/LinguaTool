@@ -29,7 +29,18 @@ if (isset($_POST['verbsearch'])) {
 
     $text = $mysqli->real_escape_string($_POST['verbsearch']);//pull search term
     $text = utf8_decode($text);
-    $query = "SELECT * FROM $tableName  WHERE `infinitive` = '$text'";//look for search term
+    $whereClause = "infinitive = '$text'";
+
+    if(isset($_POST['mood']) && !empty($_POST['mood'])){
+        $whereClause .= " AND (";
+        foreach($_POST['mood'] as $key=>$value){
+            if($value==1) $mood[] = "`mood_english`='".$mysqli->real_escape_string($key)."'";
+        }
+        $whereClause .= implode(' OR ', $mood);
+        $whereClause .= ")";
+    }
+
+    $query = "SELECT * FROM $tableName  WHERE ".$whereClause;//look for search term
     $result = $mysqli->query($query) or die($mysqli->error.__LINE__);//store result
 
     //--------------------------------------------------------------------------

@@ -14,9 +14,7 @@ $(document).ready(function(){
             /*contentType: "application/x-www-form-urlencoded;charset=utf-8",*/
             url: '../query.php',
             type: 'POST',
-            data: {
-                'verbsearch': searchText
-            },
+            data: $('#frm-lookup').serialize(),
             dataType: 'json',
             success: function(data) {
                 $.each(data, function(i, el){
@@ -56,6 +54,11 @@ $(document).ready(function(){
         $("#time").html(diff);
 
         return false;
+    });
+
+
+    $(".chbx-mood").on("click", function() {
+        console.log("test");
     });
 
 
