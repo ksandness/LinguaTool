@@ -1,15 +1,17 @@
 <?php
 
+//--------------------------------------------------------------------------
+// Example php script for fetching data from mysql database
+//--------------------------------------------------------------------------
+$host = 'localhost';
+$user = 'kevinsan_admin';
+$pass = 'veggieboy';
+$databaseName = 'lingua_tool';
+$tableName = 'verbs';
+
+
 if (isset($_POST['verbsearch'])) {
 
-    //--------------------------------------------------------------------------
-    // Example php script for fetching data from mysql database
-    //--------------------------------------------------------------------------
-    $host = 'localhost';
-    $user = 'kevinsan_admin';
-    $pass = 'veggieboy';
-    $databaseName = 'lingua_tool';
-    $tableName = 'verbs';
 
     //--------------------------------------------------------------------------
     // 1) Connect to mysql database

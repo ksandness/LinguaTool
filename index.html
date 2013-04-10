@@ -43,17 +43,17 @@
                 </header>
                 <form id="frm-lookup" action="query.php" method="post">
                     <p>
-                        <input type="text" name="verbsearch" id="verbsearch" placeholder="En Espanol por favor" class="common-input">
+                        <input type="text" name="verbsearch" id="verbsearch" placeholder="En Espanol por favor" class="common-input main-search-input">
                     </p>
-                    <div class="module-customize">
-                        <a href="#">Customize Search</a>
-                        <label>Verb Mood</label>
-                        <p><input type="checkbox" name="mood[Indicative]" value="1" id="mood-indicative" class="chbx-mood"><label for="mood-indicative">Indicative</label></p>
-                        <p><input type="checkbox" name="mood[Subjunctive]" value="1" id="mood-subjunctive" class="chbx-mood"><label for="mood-subjunctive">Subjunctive</label></p>
-                        <p><input type="checkbox" name="mood[Imperative]" value="1" id="mood-imperative" class="chbx-mood"><label for="mood-imperative">Imperative</label></p>
+                    <a  class="link-customize-search" href="#">Customize Search</a>
+                    <div id="module-customize-search" class="module-customize">
+                        <label class="common-label">Verb Mood</label>
+                        <p><input type="checkbox" name="mood[Indicative]" value="1" id="mood-indicative-search" class="chbx-mood common-chbx"><label for="mood-indicative-search">Indicative</label></p>
+                        <p><input type="checkbox" name="mood[Subjunctive]" value="1" id="mood-subjunctive-search" class="chbx-mood common-chbx"><label for="mood-subjunctive-search">Subjunctive</label></p>
+                        <p><input type="checkbox" name="mood[Imperative]" value="1" id="mood-imperative-search" class="chbx-mood common-chbx"><label for="mood-imperative-search">Imperative</label></p>
                     </div>
                     <p>
-                        <input type="submit" name="verbsearchsubmit" id="verbsearchsubmit" value="Search" class="common-btn">
+                        <input type="submit" name="frm_lookup" value="Search" class="common-btn">
                     </p>
                     <p>
                         <img src="images/ajax-loader.gif" alt="Loading" class="spinner">
@@ -61,7 +61,7 @@
                 </form>
                 <section class="result">
                     <header>
-                        <h2><span class="highlight"></span>: <span class="definition"></span></h2>
+                        <h2><span class="highlight"><!--dynamic data here--></span>: <span class="definition"><!--dynamic data here--></span></h2>
                     </header>
                     <section class="mood mood-indicative">
                         <header class="header-mood">
@@ -89,182 +89,51 @@
             </section>
             <!--end module-->
 
-            <section id="module-random" class="common-module" style="display: none;">
+            <section id="module-random" class="common-module">
                 <header>
                     <h1>Random Verbness</h1>
                 </header>
-                <form id="frm-random">
+                <form id="frm-random" action="query.php" method="post">
                     <p>
-                        <a href="#">Customize Search</a>
+                        <input type="text" name="verbrandom" id="verbrandom" placeholder="En Espanol por favor" class="main-search-input common-input">
+                    </p>
+                    <a  class="link-customize-random" href="#">Customize Search</a>
+                    <div id="module-customize-random" class="module-customize">
+                        <label class="common-label">Verb Mood</label>
+                        <p><input type="checkbox" name="mood[Indicative]" value="1" id="mood-indicative-random" class="mood-indicative chbx-mood common-chbx"><label for="mood-indicative-random">Indicative</label></p>
+                        <p><input type="checkbox" name="mood[Subjunctive]" value="1" id="mood-subjunctive-random" class="mood-subjunctive chbx-mood common-chbx"><label for="mood-subjunctive-random">Subjunctive</label></p>
+                        <p><input type="checkbox" name="mood[Imperative]" value="1" id="mood-imperative-random" class="mood-imperative chbx-mood common-chbx"><label for="mood-imperative-random">Imperative</label></p>
+                    </div>
+                    <p>
+                        <input type="submit" name="frm_random" value="Search" class="common-btn">
                     </p>
                     <p>
-                        <input type="submit" name="verbrandomsubmit" id="verbrandomsubmit" value="Random" class="common-btn">
+                        <img src="images/ajax-loader.gif" alt="Loading" class="spinner">
                     </p>
                 </form>
                 <section class="result">
                     <header>
-                        <h2><span class="highlight">Abandonar</span>: <span class="definition">to abandon, leave behind, desert; to quit, give up</span></h2>
+                        <h2><span class="highlight"><!--dynamic data here--></span>: <span class="definition"><!--dynamic data here--></span></h2>
                     </header>
                     <section class="mood">
                         <header>
                             <h3>Indicative</h3>
                         </header>
-                        <section class="tense">
-                            <header>
-                                <h4>Present</h4>
-                            </header>
-                            <p class="example-english">I abandon, am abandoning</p>
-                            <ul>
-                                <li><span class="subject">yo</span><span class="verb">abandono</span></li>
-                                <li><span class="subject">t&uacute;</span><span class="verb">abandonas</span></li>
-                                <li><span class="subject">usted</span><span class="verb">abandona</span></li>
-                                <li><span class="subject">&eacute;l/ella</span><span class="verb">abandona</span></li>
-                                <li><span class="subject">nosotros</span><span class="verb">abandonamos</span></li>
-                                <li><span class="subject">vosotros</span><span class="verb">abandonáis</span></li>
-                                <li><span class="subject">ustedes</span><span class="verb">abandonan</span></li>
-                                <li><span class="subject">ellos/ellas</span><span class="verb">abandonan</span></li>
-                            </ul>
-                        </section>
-                        <section class="tense">
-                            <header>
-                                <h4>Future</h4>
-                            </header>
-                            <p class="example-english">I will abandon</p>
-                            <ul>
-                                <li><span class="subject">yo</span><span class="verb">abandono</span></li>
-                                <li><span class="subject">t&uacute;</span><span class="verb">abandonas</span></li>
-                                <li><span class="subject">usted</span><span class="verb">abandona</span></li>
-                                <li><span class="subject">&eacute;l/ella</span><span class="verb">abandona</span></li>
-                                <li><span class="subject">nosotros</span><span class="verb">abandonamos</span></li>
-                                <li><span class="subject">vosotros</span><span class="verb">abandonáis</span></li>
-                                <li><span class="subject">ustedes</span><span class="verb">abandonan</span></li>
-                                <li><span class="subject">ellos/ellas</span><span class="verb">abandonan</span></li>
-                            </ul>
-                        </section>
-                        <section class="tense">
-                            <header>
-                                <h4>Preterite</h4>
-                            </header>
-                            <p class="example-english">I abandoned</p>
-                            <ul>
-                                <li><span class="subject">yo</span><span class="verb">abandono</span></li>
-                                <li><span class="subject">t&uacute;</span><span class="verb">abandonas</span></li>
-                                <li><span class="subject">usted</span><span class="verb">abandona</span></li>
-                                <li><span class="subject">&eacute;l/ella</span><span class="verb">abandona</span></li>
-                                <li><span class="subject">nosotros</span><span class="verb">abandonamos</span></li>
-                                <li><span class="subject">vosotros</span><span class="verb">abandonáis</span></li>
-                                <li><span class="subject">ustedes</span><span class="verb">abandonan</span></li>
-                                <li><span class="subject">ellos/ellas</span><span class="verb">abandonan</span></li>
-                            </ul>
-                        </section>
-                        <section class="tense">
-                            <header>
-                                <h4>Imperfect</h4>
-                            </header>
-                            <p class="example-english">I was abandoning, used to abandon, abandoned</p>
-                            <ul>
-                                <li><span class="subject">yo</span><span class="verb">abandono</span></li>
-                                <li><span class="subject">t&uacute;</span><span class="verb">abandonas</span></li>
-                                <li><span class="subject">usted</span><span class="verb">abandona</span></li>
-                                <li><span class="subject">&eacute;l/ella</span><span class="verb">abandona</span></li>
-                                <li><span class="subject">nosotros</span><span class="verb">abandonamos</span></li>
-                                <li><span class="subject">vosotros</span><span class="verb">abandonáis</span></li>
-                                <li><span class="subject">ustedes</span><span class="verb">abandonan</span></li>
-                                <li><span class="subject">ellos/ellas</span><span class="verb">abandonan</span></li>
-                            </ul>
-                        </section>
-                        <section class="tense">
-                            <header>
-                                <h4>Conditional</h4>
-                            </header>
-                            <p class="example-english">I would abandon</p>
-                            <ul>
-                                <li><span class="subject">yo</span><span class="verb">abandono</span></li>
-                                <li><span class="subject">t&uacute;</span><span class="verb">abandonas</span></li>
-                                <li><span class="subject">usted</span><span class="verb">abandona</span></li>
-                                <li><span class="subject">&eacute;l/ella</span><span class="verb">abandona</span></li>
-                                <li><span class="subject">nosotros</span><span class="verb">abandonamos</span></li>
-                                <li><span class="subject">vosotros</span><span class="verb">abandonáis</span></li>
-                                <li><span class="subject">ustedes</span><span class="verb">abandonan</span></li>
-                                <li><span class="subject">ellos/ellas</span><span class="verb">abandonan</span></li>
-                            </ul>
-                        </section>
+                        <!--dynamic data here-->
                     </section>
                     <!--end mood-->
                     <section class="mood">
                         <header>
                             <h3>Subjunctive</h3>
                         </header>
-                        <section class="tense">
-                            <header>
-                                <h4>Present</h4>
-                            </header>
-                            <p class="example-english">I abandon, am abandoning</p>
-                            <ul>
-                                <li><span class="subject">yo</span><span class="verb">abandono</span></li>
-                                <li><span class="subject">t&uacute;</span><span class="verb">abandonas</span></li>
-                                <li><span class="subject">usted</span><span class="verb">abandona</span></li>
-                                <li><span class="subject">&eacute;l/ella</span><span class="verb">abandona</span></li>
-                                <li><span class="subject">nosotros</span><span class="verb">abandonamos</span></li>
-                                <li><span class="subject">vosotros</span><span class="verb">abandonáis</span></li>
-                                <li><span class="subject">ustedes</span><span class="verb">abandonan</span></li>
-                                <li><span class="subject">ellos/ellas</span><span class="verb">abandonan</span></li>
-                            </ul>
-                        </section>
-                        <section class="tense">
-                            <header>
-                                <h4>Future</h4>
-                            </header>
-                            <p class="example-english">I will abandon</p>
-                            <ul>
-                                <li><span class="subject">yo</span><span class="verb">abandono</span></li>
-                                <li><span class="subject">t&uacute;</span><span class="verb">abandonas</span></li>
-                                <li><span class="subject">usted</span><span class="verb">abandona</span></li>
-                                <li><span class="subject">&eacute;l/ella</span><span class="verb">abandona</span></li>
-                                <li><span class="subject">nosotros</span><span class="verb">abandonamos</span></li>
-                                <li><span class="subject">vosotros</span><span class="verb">abandonáis</span></li>
-                                <li><span class="subject">ustedes</span><span class="verb">abandonan</span></li>
-                                <li><span class="subject">ellos/ellas</span><span class="verb">abandonan</span></li>
-                            </ul>
-                        </section>
-                        <section class="tense">
-                            <header>
-                                <h4>Imperfect</h4>
-                            </header>
-                            <p class="example-english">I abandoned</p>
-                            <ul>
-                                <li><span class="subject">yo</span><span class="verb">abandono</span></li>
-                                <li><span class="subject">t&uacute;</span><span class="verb">abandonas</span></li>
-                                <li><span class="subject">usted</span><span class="verb">abandona</span></li>
-                                <li><span class="subject">&eacute;l/ella</span><span class="verb">abandona</span></li>
-                                <li><span class="subject">nosotros</span><span class="verb">abandonamos</span></li>
-                                <li><span class="subject">vosotros</span><span class="verb">abandonáis</span></li>
-                                <li><span class="subject">ustedes</span><span class="verb">abandonan</span></li>
-                                <li><span class="subject">ellos/ellas</span><span class="verb">abandonan</span></li>
-                            </ul>
-                        </section>
+                        <!--dynamic data here-->
                     </section>
                     <!--end mood-->
                     <section class="mood">
                         <header>
                             <h3>Imperative</h3>
                         </header>
-                        <section class="tense">
-                            <header>
-                                <h4>Present</h4>
-                            </header>
-                            <p class="example-english">Abandon!</p>
-                            <ul>
-                                <li><span class="subject">yo</span><span class="verb">abandono</span></li>
-                                <li><span class="subject">t&uacute;</span><span class="verb">abandonas</span></li>
-                                <li><span class="subject">usted</span><span class="verb">abandona</span></li>
-                                <li><span class="subject">&eacute;l/ella</span><span class="verb">abandona</span></li>
-                                <li><span class="subject">nosotros</span><span class="verb">abandonamos</span></li>
-                                <li><span class="subject">vosotros</span><span class="verb">abandonáis</span></li>
-                                <li><span class="subject">ustedes</span><span class="verb">abandonan</span></li>
-                                <li><span class="subject">ellos/ellas</span><span class="verb">abandonan</span></li>
-                            </ul>
-                        </section>
+                        <!--dynamic data here-->
                     </section>
                     <!--end mood-->
                 </section>

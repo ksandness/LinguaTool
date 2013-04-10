@@ -145,9 +145,11 @@ a:hover {
 .result .mood {
     width:100%;
     border-top:1px solid #000;
+    display: none;
 }
 .result .mood:after { clear: both;content: '.';display: block;visibility: hidden;height: 0; }
-.result .mood h3 {
+.result .mood.active {
+    display: block;
 }
 .result .tense {
     float: left;
@@ -185,13 +187,32 @@ a:hover {
 }
 
 /*Look Up Module*/
-#verbsearch {
+.main-search-input {
     -moz-border-radius:10px;
     -webkit-border-radius:10px;
     border-radius:10px;
     font-size: 32px;
     font-size: 2rem;
     padding: 5px 10px;
+    display: inline-block;
+    width:500px;
+}
+
+#module-lookup.no-results .mood,
+#module-lookup.no-results header {
+    display: none;
+}
+
+.module-customize {
+    outline: 1px solid orange;
+    max-width: 500px;
+    margin: 0 auto;
+    text-align: left;
+    display: none;
+}
+
+.module-customize p {
+    margin: 0 0 5px 0;
 }
 
 
@@ -199,6 +220,14 @@ a:hover {
 
 /*Add Module*/
 
+/*FORM ELEMENTS*/
+.common-label {
+    font-weight: bold;
+}
+
+.common-chbx {
+    margin-right: 5px;
+}
 
 /*FOOTER*/
 #main-footer {
