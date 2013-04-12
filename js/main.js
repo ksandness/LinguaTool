@@ -1,53 +1,53 @@
 $(document).ready(function(){
 
     var searchUtility = {
-        searchTxt : function() {
-            return $("#verbsearch").val()
+        searchTxt : function(formModule) {
+            return $(formModule).find(".main-search-input").val()
         },
-        clearSearch : function() {
-            $('#module-lookup .spinner').show();
-            $('#module-lookup .result').hide();
-            $('#module-lookup').removeClass("no-results");
-            $('.mood').removeClass("active");
-            $('.error-no-results').remove();
-            $('#module-lookup .result .tense').remove();
+        clearSearch : function(formModule) {
+            $(formModule).find('.spinner').show();
+            $(formModule).find('.result').hide();
+            $(formModule).removeClass("no-results");
+            $(formModule).find('.mood').removeClass("active");
+            $(formModule).find('.error-no-results').remove();
+            $(formModule).find('.result .tense').remove();
         },
-        verbSearch : function() {
+        verbSearch : function(formModule) {
             $.ajax({//AJAX submission
                 url: '../query.php',
                 type: 'POST',
-                data: $('#frm-lookup').serialize(),
+                data: $(formModule).find('form').serialize(),
                 dataType: 'json',
                 success: function(data) {
 
                     $.each(data, function(i, el){
-                        $('#module-lookup .result .highlight').html(el.infinitive);
-                        $('#module-lookup .result .definition').html(el.infinitiveEnglish);
+                        $(formModule).find('.result .highlight').html(el.infinitive);
+                        $(formModule).find('.result .definition').html(el.infinitiveEnglish);
 
                         var chunk = '<section class="tense"><header><h4>' + el.tenseEnglish + '</h4></header><p class="example-english">' + el.verbEnglish + '</p><ul><li><span class="subject">yo</span><span class="verb">' + el.form1s + '</span></li><li><span class="subject">t&uacute;</span><span class="verb">' + el.form2s + '</span></li><li><span class="subject">usted</span><span class="verb">' + el.form3s + '</span></li><li><span class="subject">&eacute;l/ella</span><span class="verb">' + el.form3s + '</span></li><li><span class="subject">nosotros</span><span class="verb">' + el.form1p + '</span></li><li><span class="subject">vosotros</span><span class="verb">' + el.form2p + '</span></li><li><span class="subject">ustedes</span><span class="verb">' + el.form3p + '</span></li><li><span class="subject">ellos/ellas</span><span class="verb">' + el.form3p + '</span></li></ul></section>';
                         if (el.moodEnglish.toLowerCase() === "indicative") {
-                            $('.mood-indicative').append(chunk);
+                            $(formModule).find('.mood-indicative').append(chunk);
                         } else if (el.moodEnglish.toLowerCase() === "subjunctive") {
-                            $('.mood-subjunctive').append(chunk);
+                            $(formModule).find('.mood-subjunctive').append(chunk);
                         } else if (el.moodEnglish.toLowerCase() === "imperative affirmative") {
-                            $('.mood-imperative').append(chunk);
+                            $(formModule).find('.mood-imperative').append(chunk);
                         } else if (el.moodEnglish.toLowerCase() === "imperative negative") {
-                            $('.mood-imperative').append(chunk);
+                            $(formModule).find('.mood-imperative').append(chunk);
                         }
                     });
 
-                    $('.mood').has('.tense').addClass("active");
-                    $('#module-lookup .result').fadeIn(300);
+                    $(formModule).find('.mood').has('.tense').addClass("active");
+                    $(formModule).find('.result').fadeIn(300);
 
                 },
                 error: function() {
                     //$('#module-lookup .result').empty();
-                    $('#module-lookup').addClass("no-results");
-                    $('#module-lookup .result').prepend('<p class="error-no-results error">No results found</p>');
-                    $('#module-lookup .result').fadeIn(300);
+                    $(formModule).addClass("no-results");
+                    $(formModule).find('.result').prepend('<p class="error-no-results error">No results found</p>');
+                    $(formModule).find('.result').fadeIn(300);
                 },
                 complete: function() {
-                    $('#module-lookup .spinner').hide();
+                    $(formModule).find('.spinner').hide();
                 }
             });
 
@@ -56,15 +56,25 @@ $(document).ready(function(){
 
 
     $('#frm-lookup').on('submit', function(){
-        var start = (new Date).getTime();  // log start timestamp
+        var formModule = $(this).parent(".common-module");
 
-        if ($('#module-lookup .result .highlight').text().toLowerCase() !== searchUtility.searchTxt().toLowerCase()) {
-            searchUtility.clearSearch();
-            searchUtility.verbSearch();
+        //var start = (new Date).getTime();  // log start timestamp
+
+        if ($(formModule).find('.result .highlight').text().toLowerCase() !== searchUtility.searchTxt(formModule).toLowerCase()) {
+            searchUtility.clearSearch(formModule);
+            searchUtility.verbSearch(formModule);
         }
 
-        var diff = (new Date).getTime() - start;
-        $("#time").html(diff);
+        //var diff = (new Date).getTime() - start;
+        //$("#time").html(diff);
+
+        return false;
+    });
+
+    $('#frm-random').on('submit', function(){
+        var formModule = $(this).parent(".common-module");
+        searchUtility.clearSearch(formModule);
+        searchUtility.verbSearch(formModule);
 
         return false;
     });
@@ -72,15 +82,18 @@ $(document).ready(function(){
 
     $(".chbx-mood").on("click", function() {
 
-        if (($('#module-lookup .result .highlight').text().toLowerCase() === searchUtility.searchTxt().toLowerCase()) && (searchUtility.searchTxt().toLowerCase() !== "") ) {
-            searchUtility.clearSearch();
-            searchUtility.verbSearch();
+        var formModule = $(this).parents(".common-module");
+
+        if (($(formModule).find('.result .highlight').text().toLowerCase() === searchUtility.searchTxt(formModule).toLowerCase()) && (searchUtility.searchTxt(formModule).toLowerCase() !== "") ) {
+
+            searchUtility.clearSearch(formModule);
+            searchUtility.verbSearch(formModule);
         }
 
     });
 
-    $(".link-customize-search").on("click", function() {
-        var module = $("#module-customize-search");
+    $(".link-customize").on("click", function() {
+        var module = $(this).next(".module-customize");
         if ($(module).is(":visible")) {
             $(module).slideUp(500);
         } else {

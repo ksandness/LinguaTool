@@ -45,7 +45,7 @@
                     <p>
                         <input type="text" name="verbsearch" id="verbsearch" placeholder="En Espanol por favor" class="common-input main-search-input">
                     </p>
-                    <a  class="link-customize-search" href="#">Customize Search</a>
+                    <a  class="link-customize" href="#">Customize Search</a>
                     <div id="module-customize-search" class="module-customize">
                         <label class="common-label">Verb Mood</label>
                         <p><input type="checkbox" name="mood[Indicative]" value="1" id="mood-indicative-search" class="chbx-mood common-chbx"><label for="mood-indicative-search">Indicative</label></p>
@@ -95,18 +95,20 @@
                 </header>
                 <form id="frm-random" action="query.php" method="post">
                     <p>
-                        <input type="text" name="verbrandom" id="verbrandom" placeholder="En Espanol por favor" class="main-search-input common-input">
+                        <!--<input type="text" name="randomsearch" id="verbrandom" placeholder="En Espanol por favor" class="main-search-input common-input">-->
+                        <input type='hidden' name='randomsearch'>
+                        <input type="submit" name="frm_random" value="Random Verb!" class="common-btn common-btn-featured">
                     </p>
-                    <a  class="link-customize-random" href="#">Customize Search</a>
+                    <a  class="link-customize" href="#">Customize Search</a>
                     <div id="module-customize-random" class="module-customize">
                         <label class="common-label">Verb Mood</label>
                         <p><input type="checkbox" name="mood[Indicative]" value="1" id="mood-indicative-random" class="mood-indicative chbx-mood common-chbx"><label for="mood-indicative-random">Indicative</label></p>
                         <p><input type="checkbox" name="mood[Subjunctive]" value="1" id="mood-subjunctive-random" class="mood-subjunctive chbx-mood common-chbx"><label for="mood-subjunctive-random">Subjunctive</label></p>
                         <p><input type="checkbox" name="mood[Imperative]" value="1" id="mood-imperative-random" class="mood-imperative chbx-mood common-chbx"><label for="mood-imperative-random">Imperative</label></p>
                     </div>
-                    <p>
+                    <!--<p>
                         <input type="submit" name="frm_random" value="Search" class="common-btn">
-                    </p>
+                    </p>-->
                     <p>
                         <img src="images/ajax-loader.gif" alt="Loading" class="spinner">
                     </p>
@@ -115,21 +117,21 @@
                     <header>
                         <h2><span class="highlight"><!--dynamic data here--></span>: <span class="definition"><!--dynamic data here--></span></h2>
                     </header>
-                    <section class="mood">
+                    <section class="mood mood-indicative">
                         <header>
                             <h3>Indicative</h3>
                         </header>
                         <!--dynamic data here-->
                     </section>
                     <!--end mood-->
-                    <section class="mood">
+                    <section class="mood mood-subjunctive">
                         <header>
                             <h3>Subjunctive</h3>
                         </header>
                         <!--dynamic data here-->
                     </section>
                     <!--end mood-->
-                    <section class="mood">
+                    <section class="mood mood-imperative">
                         <header>
                             <h3>Imperative</h3>
                         </header>
@@ -139,6 +141,7 @@
                 </section>
                 <!--end result-->
             </section>
+            <!--end module-->
 
             <section id="module-add" class="common-module" style="display: none;">
                 <header>
