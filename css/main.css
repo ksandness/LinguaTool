@@ -80,7 +80,7 @@ a:hover {
 /*HEADER*/
 #main-header {
     text-align: center;
-    padding: 20px;
+    padding: 20px 10px;
 }
 #main-header h1 {
     margin:0;
@@ -90,8 +90,7 @@ a:hover {
 /*NAV*/
 #main-nav {
     text-align: center;
-    outline: 1px solid orange;
-    padding: 10px 0;
+    padding: 10px;
 }
 #main-nav ul {
     margin: 0;
@@ -121,16 +120,19 @@ a:hover {
 }
 #main-nav a:hover,
 #main-nav a.selected {
-    background: #207cca;
+    background: #f9b126;
     text-decoration: none;
 }
 
 /*CONTENT*/
 #main-content {
     max-width: 960px;
-    outline: 1px solid red;
     margin: 0 auto;
     text-align: center;
+    padding: 0;
+}
+.common-module {
+    display: none;
 }
 .common-module .result {
     text-align: left;
@@ -178,6 +180,7 @@ a:hover {
 }
 .result .tense .example-english {
     margin:0;
+    font-weight: normal;
 }
 
 /*Tables*/
@@ -187,6 +190,10 @@ a:hover {
 }
 
 /*Look Up Module*/
+#module-lookup.common-module {
+    display: block;
+}
+
 .main-search-input {
     -moz-border-radius:10px;
     -webkit-border-radius:10px;
@@ -199,12 +206,11 @@ a:hover {
 }
 
 #module-lookup.no-results .mood,
-#module-lookup.no-results header {
+#module-lookup.no-results .result header {
     display: none;
 }
 
 .module-customize {
-    outline: 1px solid orange;
     max-width: 500px;
     margin: 0 auto;
     text-align: left;
@@ -232,6 +238,7 @@ a:hover {
 /*FOOTER*/
 #main-footer {
     text-align: center;
+    padding: 0 10px;
 }
 
 
@@ -251,8 +258,41 @@ a:hover {
    Media Queries
    ========================================================================== */
 
-@media only screen and (min-width: 35em) {
-
+@media only screen and (max-width: 800px) {
+    .result .tense {
+        width: 100%;
+        float: none;
+    }
+    .result .tense.active {
+        padding-bottom: 10px;
+    }
+    .result .tense:hover {
+        background: none;
+    }
+    .result .tense header {
+        background: orange;
+        -moz-border-radius:5px;
+        -webkit-border-radius:5px;
+        border-radius: 5px;
+        margin-bottom: 5px;
+        cursor: pointer;
+        padding:5px 10px;
+    }
+    .result .tense.active header {
+        background: #edbc10;
+    }
+    .result .tense ul {
+        display: none;
+    }
+    #main-content {
+        padding: 0 10px;
+    }
+    .main-search-input {
+        width: 100%;
+        -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+        -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+        box-sizing: border-box;
+    }
 }
 
 @media print,
