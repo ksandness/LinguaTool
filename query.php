@@ -14,6 +14,7 @@ function specialCharacters(&$item, $key) {//encode array to allow for special la
 }
 
 
+//IF REGULAR SEARCH
 if (isset($_POST['verbsearch'])) {
 
 
@@ -86,6 +87,8 @@ if (isset($_POST['verbsearch'])) {
 
 }
 
+
+//IF RANDOM SEARCH
 if (isset($_POST['randomsearch'])) {
 
 
@@ -104,15 +107,20 @@ if (isset($_POST['randomsearch'])) {
     //--------------------------------------------------------------------------
     // 2) Query database for data
     //--------------------------------------------------------------------------
+    $currentRandom = Trim(stripslashes($_POST['currentrandom']));
 
-    $randomResult = $mysqli->query("SELECT infinitive FROM verbs ORDER BY RAND() LIMIT 1") or die($mysqli->error.__LINE__);
-    if($randomResult->num_rows > 0) {
-        while($row = $randomResult->fetch_array()) {
-            $randomVerb = $row["infinitive"];
+    if ($currentRandom != "") {
+        $fetchVerb = $currentRandom;
+    } else {
+        $fetchResult = $mysqli->query("SELECT infinitive FROM verbs ORDER BY RAND() LIMIT 1") or die($mysqli->error.__LINE__);
+        if($fetchResult->num_rows > 0) {
+            while($row = $fetchResult->fetch_array()) {
+                $fetchVerb = $row["infinitive"];
+            }
         }
     }
 
-    $whereClause = "infinitive = '$randomVerb'";
+    $whereClause = "infinitive = '$fetchVerb'";
 
     if(isset($_POST['mood']) && !empty($_POST['mood'])){
         $whereClause .= " AND (";
@@ -162,4 +170,50 @@ if (isset($_POST['randomsearch'])) {
     }
 
 }
+
+//IF RANDOM SEARCH
+if (isset($_POST['suggestion_txt'])) {
+    //--------------------------------------------------------------------------
+    // 1) Connect to mysql database
+    //--------------------------------------------------------------------------
+
+    $mysqli = new mysqli($host, $user, $pass, $databaseName);//new connection
+
+    if (mysqli_connect_errno()) {//if connection fails
+        printf("Connect failed: %s\n", mysqli_connect_error());
+        exit();
+    }
+
+
+    //--------------------------------------------------------------------------
+    // 2) Query database for data
+    //--------------------------------------------------------------------------
+    $fetchVerb = Trim(stripslashes($_POST['suggestion_txt']));
+    $whereClause = "infinitive like '$fetchVerb%'";
+    $query = "SELECT infinitive, COUNT(*) c FROM $tableName WHERE $whereClause GROUP BY infinitive HAVING c > 1";
+    $result = $mysqli->query($query) or die($mysqli->error.__LINE__);//store result
+
+    //--------------------------------------------------------------------------
+    // 3) echo result as json
+    //--------------------------------------------------------------------------
+
+    $json = array();//create an array that will be returned
+    if($result->num_rows > 0) {
+        while($row = $result->fetch_array()) {
+            $jsonrow = array (
+                'infinitive' => $row["infinitive"]
+            );
+            array_push($json, $jsonrow);
+        }
+
+        array_walk_recursive($json, 'specialCharacters');
+
+        $jsonstring = json_encode($json);//convert to JSON format
+        echo $jsonstring;
+    }
+    else {
+        echo 'NO RESULTS';
+    }
+}
+
 ?>

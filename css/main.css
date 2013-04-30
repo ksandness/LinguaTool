@@ -86,6 +86,10 @@ a:hover {
     margin:0;
     line-height: 1;
 }
+#logo {
+    font-size: 40px;
+    margin:0;
+}
 
 /*NAV*/
 #main-nav {
@@ -156,6 +160,10 @@ a:hover {
 .result .tense {
     float: left;
     width:33%;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;
+    padding:10px;
 }
 .result .tense:hover {
     background: #cee3f7;
@@ -194,6 +202,10 @@ a:hover {
     display: block;
 }
 
+#frm-lookup {
+    position: relative;
+}
+
 .main-search-input {
     -moz-border-radius:10px;
     -webkit-border-radius:10px;
@@ -205,21 +217,60 @@ a:hover {
     width:500px;
 }
 
-#module-lookup.no-results .mood,
-#module-lookup.no-results .result header {
+.common-module.no-results .mood,
+.common-module.no-results .result header {
     display: none;
 }
-
+.link-customize {
+    margin-bottom: 5px;
+    display: inline-block;
+}
 .module-customize {
     max-width: 500px;
     margin: 0 auto;
     text-align: left;
     display: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px;
+    background: #cee3f7;
+    -moz-border-radius: 5px;
+    -webkit-border-radius :5px;
+    border-radius: 5px;
 }
 
 .module-customize p {
     margin: 0 0 5px 0;
 }
+
+
+/*Hints Dropdown*/
+.module-suggestions {
+    display: none;
+    background: #fff;
+    list-style: none;
+    width:500px;
+    position: absolute;
+    left: 50%;
+    top:35px;
+    margin-left: -250px;
+    text-align: left;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 5px 10px;
+}
+.module-suggestions li {
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.module-suggestions li:hover,
+.module-suggestions li.selected-suggest {
+    background: #edbc10;
+    color: #000;
+}
+
 
 
 /*Random Module*/
@@ -244,16 +295,6 @@ a:hover {
 
 
 
-
-
-
-
-
-
-
-
-
-
 /* ==========================================================================
    Media Queries
    ========================================================================== */
@@ -262,6 +303,7 @@ a:hover {
     .result .tense {
         width: 100%;
         float: none;
+        padding: 0;
     }
     .result .tense.active {
         padding-bottom: 10px;
@@ -278,7 +320,8 @@ a:hover {
         cursor: pointer;
         padding:5px 10px;
     }
-    .result .tense.active header {
+    .result .tense.active header,
+    .result .tense:hover header {
         background: #edbc10;
     }
     .result .tense ul {
@@ -289,8 +332,16 @@ a:hover {
     }
     .main-search-input {
         width: 100%;
-        -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
-        -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    .module-suggestions {
+        width:auto;
+        margin-left: 10px;
+        margin-right: 10px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
         box-sizing: border-box;
     }
 }

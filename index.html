@@ -43,9 +43,12 @@
                 </header>
                 <form id="frm-lookup" action="query.php" method="post">
                     <p>
-                        <input type="text" name="verbsearch" id="verbsearch" placeholder="En Espanol por favor" class="common-input main-search-input">
+                        <input type="text" name="verbsearch" id="verbsearch" placeholder="En Espanol por favor" class="common-input main-search-input" autocomplete="off">
                     </p>
-                    <a  class="link-customize" href="#">Customize Search</a>
+                    <ul id="lookup-suggestions" class="module-suggestions">
+                        <!--suggest list content here-->
+                    </ul>
+                    <a  class="link-customize" href="#">Customize Search / Filter</a>
                     <div id="module-customize-search" class="module-customize">
                         <label class="common-label">Verb Mood</label>
                         <p><input type="checkbox" name="mood[Indicative]" value="1" id="mood-indicative-search" class="chbx-mood common-chbx"><label for="mood-indicative-search">Indicative</label></p>
@@ -95,11 +98,11 @@
                 </header>
                 <form id="frm-random" action="query.php" method="post">
                     <p>
-                        <!--<input type="text" name="randomsearch" id="verbrandom" placeholder="En Espanol por favor" class="main-search-input common-input">-->
                         <input type='hidden' name='randomsearch'>
+                        <input type="hidden" name="currentrandom" value="">
                         <input type="submit" name="frm_random" value="Random Verb!" class="common-btn common-btn-featured">
                     </p>
-                    <a  class="link-customize" href="#">Customize Search</a>
+                    <a  class="link-customize" href="#">Customize Search / Filter</a>
                     <div id="module-customize-random" class="module-customize">
                         <label class="common-label">Verb Mood</label>
                         <p><input type="checkbox" name="mood[Indicative]" value="1" id="mood-indicative-random" class="mood-indicative chbx-mood common-chbx"><label for="mood-indicative-random">Indicative</label></p>
@@ -115,7 +118,7 @@
                 </form>
                 <section class="result">
                     <header>
-                        <h2><span class="highlight"><!--dynamic data here--></span>: <span class="definition"><!--dynamic data here--></span></h2>
+                        <h2><span class="highlight"></span>: <span class="definition"><!--dynamic data here--></span></h2>
                     </header>
                     <section class="mood mood-indicative">
                         <header>
@@ -158,7 +161,6 @@
         <!--end footer-->
 
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
 
         <script src="js/plugins.js"></script>
         <script src="js/main.js"></script>
