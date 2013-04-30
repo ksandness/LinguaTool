@@ -62,7 +62,7 @@ textarea {
 
 /*General*/
 body {
-    background: #bed6ed;
+    background: #fff;
 }
 a {
     text-decoration: none;
@@ -124,7 +124,7 @@ a:hover {
 }
 #main-nav a:hover,
 #main-nav a.selected {
-    background: #f9b126;
+    background: #f38a23;
     text-decoration: none;
 }
 
@@ -215,6 +215,9 @@ a:hover {
     padding: 5px 10px;
     display: inline-block;
     width:500px;
+    -moz-box-shadow: 0 0 20px #cee3f7;
+    -webkit-box-shadow: 0 0 20px #cee3f7;
+    box-shadow: 0 0 20px #cee3f7;
 }
 
 .common-module.no-results .mood,
@@ -260,6 +263,10 @@ a:hover {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
     padding: 5px 10px;
+    border-left: 1px solid #999;
+    -moz-box-shadow: 5px 5px 10px #999;
+    -webkit-box-shadow: 5px 5px 10px #999;
+    box-shadow: 5px 5px 10px #999;
 }
 .module-suggestions li {
     padding: 5px 10px;
