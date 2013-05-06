@@ -14,7 +14,7 @@ $(document).ready(function() {
     /*************/
 
     /**
-     * Clears elements of a the form specified as the parameter
+     * Clears elements of the form specified as the parameter
      */
     function clearFormElements(ele) {
         $(ele).find(':input').each(function() {
@@ -34,7 +34,7 @@ $(document).ready(function() {
     }
 
     /**
-     * Performs cleanup of module when a main navigation tag is clicked on
+     * Performs cleanup of main content area when a main navigation tag is clicked on
      */
     mainNav$.on("click", function() {
         clearFormElements($(".common-module").find('form'));
@@ -67,7 +67,7 @@ $(document).ready(function() {
     /*************/
 
     /**
-     * accordion style behavior applied to verb tenses in mobile view
+     * function - accordion style behavior applied to verb tenses in mobile view
      */
     function verbToggle() {
         if ($(this).hasClass("active")) {
@@ -149,6 +149,7 @@ $(document).ready(function() {
             $(formModule).find('.error-no-results').remove();
             $(formModule).find('.result .tense').remove();
             $(formModule).find('.module-suggestions').hide();
+            liPossition = -1;
         },
         verbSearch : function(formModule) {
             $(formModule).find('.spinner').show();
@@ -265,17 +266,31 @@ $(document).ready(function() {
     /*SEARCH SUGGESTION BOX*/
     /*************/
 
-    /*$("#main-content").on("keypress", '.module-suggestions li', (function(e) {
-        if(e.which == 13) {
-            alert('You pressed enter!');
-        }
-    }));*/
-    /*$("#main-content").on("click", ".module-suggestions li", function(){
-        var suggestion = $(this).text();
-        $("#verbsearch").val(suggestion);
-    });*/
+    var liPossition = -1;//Suggestion List focused item. Initiall set to -1(nothing selected)
 
-    var liPossition = -1;
+    /**
+     * On suggestion list item hover, set liPossition to list item currently being hovered on
+     */
+    $("#main-content").on("mouseover", "#lookup-suggestions li", function() {
+        $("#lookup-suggestions li").removeClass("selected-suggest");
+        $(this).addClass("selected-suggest");
+        liPossition = $(this).index();
+    });
+
+    /**
+     * On suggestion list item click, select verb and trigger search
+     */
+    $("#main-content").on("click", "#lookup-suggestions li", function() {
+        $("#verbsearch").val($(this).text());
+        $("#frm-lookup").submit();
+    });
+
+    /**
+     * On KEYPRESS
+     * Down Arrow - select next suggest list item and update input box display
+     * Up Arrow - select previous suggest list item and update input box display
+     * Any other key - trigger ajax suggestion search if applicable
+     */
     $("#verbsearch").on("keyup",function(e) {
 
         if (e.keyCode == 40) { // down arrow key code
@@ -297,7 +312,7 @@ $(document).ready(function() {
             $("#lookup-suggestions li:eq("+liPossition+")").addClass("selected-suggest");
 
         } else if (e.keyCode == 13) { // enter key code
-            //some code to proceed the form
+            $("#lookup-suggestions").hide();
         } else {
             var partialString = $("#verbsearch").val();
             console.log(partialString);
@@ -308,7 +323,6 @@ $(document).ready(function() {
                     data: { 'suggestion_txt' : partialString },
                     dataType: 'json',
                     success: function(data) {
-                        console.log("success");
                         var suggestList = '';
                         $.each(data, function(i, el) {
                             var chunk = '<li>' + el.infinitive + '</li>';
@@ -318,10 +332,8 @@ $(document).ready(function() {
                     },
                     error: function() {
                         $("#lookup-suggestions").hide();
-                        console.log("error");
                     },
                     complete: function() {
-                        console.log("complete");
                     }
                 });
             }

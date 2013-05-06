@@ -272,7 +272,6 @@ a:hover {
     padding: 5px 10px;
     cursor: pointer;
 }
-.module-suggestions li:hover,
 .module-suggestions li.selected-suggest {
     background: #edbc10;
     color: #000;
@@ -344,9 +343,9 @@ a:hover {
         box-sizing: border-box;
     }
     .module-suggestions {
-        width:auto;
-        margin-left: 10px;
-        margin-right: 10px;
+        width:96%;
+        margin:1em 2% 0 2%;
+        left: auto;
         -webkit-box-sizing: border-box;
         -moz-box-sizing: border-box;
         box-sizing: border-box;
