@@ -6,7 +6,9 @@ $(document).ready(function() {
     /*************/
     /*STORE COMMON SELECTED ELEMENTS IN VARIABLES*/
     /*************/
-    var mainNav$ = $("#main-nav").find("a");
+    //var mainNav$ = $("#main-nav").find("a");
+    var mainNav$ = document.getElementById("main-nav").querySelectorAll('a');
+    console.log(mainNav$);
 
 
     /*************/
