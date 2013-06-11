@@ -19,42 +19,94 @@ $(document).ready(function() {
      * Clears elements of the form specified as the parameter
      */
     function clearFormElements(ele) {
-        $(ele).find(':input').each(function() {
-            switch (this.type) {
-            case 'password':
-            case 'select-multiple':
-            case 'select-one':
-            case 'text':
-            case 'textarea':
-                $(this).val('');
-                break;
-            case 'checkbox':
-            case 'radio':
-                this.checked = false;
-                break;
+        var inputsAll = ele.querySelectorAll("input");
+        for (var i = 0; i < inputsAll.length; i++) {
+            switch (inputsAll[i].type) {
+                case 'password':
+                case 'select-multiple':
+                case 'select-one':
+                case 'text':
+                case 'textarea':
+                    inputsAll[i].value='';
+                    break;
+                case 'checkbox':
+                case 'radio':
+                    inputsAll[i].checked = false;
+                    break;
             }
-        });
+        }
     }
 
     /**
      * Performs cleanup of main content area when a main navigation tag is clicked on
      */
-    mainNav$.on("click", function() {
-        clearFormElements($(".common-module").find('form'));
-        $(".common-module").find('.module-customize').hide();
-        mainNav$.removeClass("selected");
-        $(this).addClass("selected");
-        var tab = $(this).data("tab").substring(4);
-        $("#main-content").children(".common-module").hide();
-        searchUtility.clearSearch(".common-module");
-        $("#module-" + tab).fadeIn(500);
-            return false;
+    eventUtility.addEvent(document, "click", function(event) {
+        var target = eventUtility.getTarget(event);
+
+        if (target.tagName.toUpperCase() === "A" && target.parentNode.parentNode.parentNode.id === "main-nav") {
+
+            var allForms = document.querySelectorAll('form');
+            for (var i = 0; i < allForms.length; i++) {
+                clearFormElements(allForms[i]);
+            }
+
+            var customizeModules = document.getElementsByClassName("module-customize");
+            for (var i = 0; i < customizeModules.length; i++) {
+                customizeModules[i].style.display="none"
+            }
+
+            for (var i = 0; i < mainNav$.length; i++) {
+                eventUtility.removeClass(mainNav$[i], "selected");
+            }
+            eventUtility.addClass(target, "selected");
+
+            var tab = target.getAttribute("data-tab").substring(4);
+
+            var commonModules = document.getElementById("main-content").getElementsByClassName("common-module");
+            for (var i = 0; i < commonModules.length; i++) {
+                commonModules[i].style.display="none";
+                commonModules[i].style.opacity=0;
+            }
+
+            searchUtility.clearSearch(".common-module");
+
+            var currentTab = document.getElementById("module-" + tab);
+
+            currentTab.style.display="block";
+            var runCount = 1;
+            function timerMethod() {
+                runCount++;
+                if(runCount > 10) clearInterval(timerId);
+
+                var opacity = runCount/10;
+                currentTab.style.opacity=opacity;
+            }
+            var timerId = setInterval(timerMethod, 50);
+
+
+            eventUtility.preventDefault(event);
+        }
+
+        if(target.className == "link-customize") {
+            var slideDiv = node_after(target);
+            slideDiv.style.display = "block";
+            slideDiv.style.overflow = "hidden";
+            var height = slideDiv.clientHeight;
+            slideDiv.style.height = "0px";
+            slideDown(slideDiv, height, 10, 50);
+            if(target.nextSibling.style.display="block") {
+                console.log("showing");
+            } else {
+                console.log("hidding");
+            }
+        }
     });
+
 
     /**
      * Toggles visibility of "customize search/visibility" box
      */
-    $(".link-customize").on("click", function() {
+    /*$(".link-customize").on("click", function() {
         var module = $(this).next(".module-customize");
         if ($(module).is(":visible")) {
             $(module).slideUp(500);
@@ -62,7 +114,7 @@ $(document).ready(function() {
             $(module).slideDown(500);
         }
         return false;
-    });
+    });*/
 
 
     /*************/
