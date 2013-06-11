@@ -1,6 +1,8 @@
 /*jslint browser: true*/
 /*global $, Modernizr*/
 
+/*Test Comment*/
+
 $(document).ready(function() {
 
     /*************/
