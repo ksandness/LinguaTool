@@ -1,3 +1,2 @@
-read me file
-
-another edit
+License
+this data is available via a <a href="http://creativecommons.org/licenses/by-nc-sa/3.0/>Creative Commons license</a> for anyone to use for non-commercial purposes so long as you provide attribution. If you alter, transform or build upon this work then you may distribute the resulting work only under the same license.
